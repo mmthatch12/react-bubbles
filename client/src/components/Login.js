@@ -12,7 +12,9 @@ const Login = props => {
 
   const loginSubmit = e => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/login')
+    axios.post('http://localhost:5000/api/login', user)
+      .then(res => console.log('res.data from login servier', res.data))
+      .catch(err => console.log(err.response))
   }
 
 
@@ -22,10 +24,10 @@ const Login = props => {
   // when you have handled the token, navigate to the BubblePage route
   return (
     <>
-      <form>
+      <form onSubmit={loginSubmit}>
         <input type='text' name='username' value={user.username} placeholder='Username' onChange={handleChange} />
         <input type='text' name='password' value={user.password} placeholder='Password' onChange={handleChange} />
-        <button>Submit</button>
+        <button type='submit'>Submit</button>
       </form>
     </>
   );
