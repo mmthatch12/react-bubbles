@@ -13,11 +13,11 @@ const Login = props => {
   const loginSubmit = e => {
     e.preventDefault();
     axios.post('http://localhost:5000/api/login', user)
-      .then(res => console.log('res.data from login servier', res.data))
-      .catch(err => {
-        console.log(err.response)
+      .then(res => {
+        console.log('res.data from login servier', res.data)
         localStorage.setItem('token', res.data.payload)  
       })
+      .catch(err => console.log(err.response))
   }
 
 
