@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios'
 
 const Login = props => {
   const[user, setUser] = useState({ username: '', password: '' })
@@ -9,7 +10,12 @@ const Login = props => {
     })
   }
 
-  
+  const loginSubmit = e => {
+    e.preventDefault();
+    axios.post('http://localhost:5000/api/login')
+  }
+
+
 
 
   // make a post request to retrieve a token from the api
