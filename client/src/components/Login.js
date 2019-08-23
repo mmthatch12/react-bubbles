@@ -16,6 +16,7 @@ const Login = props => {
       .then(res => {
         console.log('res.data from login servier', res.data)
         localStorage.setItem('token', res.data.payload)  
+        props.history.push('/bubblepage')
       })
       .catch(err => console.log(err.response))
   }

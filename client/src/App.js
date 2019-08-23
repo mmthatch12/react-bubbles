@@ -10,7 +10,6 @@ function App() {
   const [colorList, setColorList] = useState([]);
   return (
     <Router>
-      <Link to='/bubblepage'>Protected Bubble Page</Link>
       <div className="App">
         <Route exact path="/" component={Login} />
         {/* 
