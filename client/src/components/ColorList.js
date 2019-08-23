@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { prependOnceListener } from "cluster";
+
 
 const initialColor = {
   color: "",
@@ -28,27 +28,29 @@ const ColorList = ({ colors, updateColors }) => {
       .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
         console.log('res from cololist .put', res.data)
-        setColorToEdit(initialColor)
-        updateColors(res.data)
+        const newArray = colors.filter(color => color.id !== res.data.id)
+        newArray.unshift(res.data)
+        updateColors(newArray)
         
       })
       .catch(err => console.log(err.response))
-      
-
+    
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
   };
 
-  const deleteColor = color => {
-    e.preventDefault();
+  const deleteColor = (color) => {
+    // make a delete request to delete this color
     axiosWithAuth()
-      .delete(`http://localhost:5000/api/colors/${colorToEdit.id}`)
+      .delete(`http://localhost:5000/api/colors/${color.id}`)
       .then(res => {
-        updateColors(res.data)
-
+        console.log('res.data from deleteColor', res)
+        const newarray = colors.filter(color => color.id !== colorToEdit.id)
+        updateColors(newarray)
       })
       .catch(err => console.log(err.response))
+
   };
 
   return (
